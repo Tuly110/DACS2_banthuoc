@@ -139,104 +139,133 @@
         background-color:#37517e ;
 
     }
+    .ui-w-40 {
+    width: 40px !important;
+    height: auto;
+}
+
+.card{
+    box-shadow: 0 1px 15px 1px rgba(52,40,104,.08);    
+}
+
+.ui-product-color {
+    display: inline-block;
+    overflow: hidden;
+    margin: .144em;
+    width: .875rem;
+    height: .875rem;
+    border-radius: 10rem;
+    -webkit-box-shadow: 0 0 0 1px rgba(0,0,0,0.15) inset;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.15) inset;
+    vertical-align: middle;
+}
+a{
+    text-decoration: none;
+}
+.media-body a#TenSP{
+    color:black !important;
+    word-wrap: break-word;      
+    white-space: -moz-pre-wrap; 
+    white-space: pre-wrap;
+}
+.media-body a#TenSP:hover{
+    color:#37517e !important;
+}
+    
 </style>
 <body class="container">
-    <h1>Giỏ hàng của bạn</h1>
+    
     <?php if( $GLOBALS['change_quantity'] ){?>
         <h3>Sản phẩm bạn muốn mua vượt quá số lượng sản phẩm chúng tôi hiện có. Vui lòng <a href="../cart/cart.php">tải lại</a> giở hàng</h3>
     <?php }else { ?>
     <hr>
     <form action="cart.php?action=submit" method="POST">
-        <div id="Chi_tiet" class="row">
-            <div class="danhsach col-md-8 col-12 ">
-                <div class="cart">
-                    <h3>Giỏ hàng của bạn</h3>
-                </div>
-                <div class="cart">
-                    <table class="table table-hover">
-                        <tr>
-                            <th>STT</th>
-                            <th>Hình ảnh</th>
-                            <th>Tên sản phẩm</th>
-                            <th>Giá</th>
-                            <th>Số lượng</th>
-                            <th>Thành tiền</th>
-                            <th><i class="far fa-trash-alt"></i></th>
-                        </tr>
-                        <?php
-                            $num=1;
-                            $total=0;
-                            if(isset($kq))
-                            {
-                                while($row=mysqli_fetch_array($kq)){ 
-                                    $total= $total+intval($row["Gia"]) * intval($_SESSION["cart"][$row['ID']]) ;
-                            ?>
-                            
-                            <tr>
-                                <td>
-                                    <?= $num++; ?>
-                                </td>
-                                <td>
-                                    <img src="../IMG/SP/<?= $row['Hinh_Anh'] ?>" alt="" width="50px" height="50px">
-                                    
-                                </td>
-                                <td>
-                                    <?= $row['Ten_SP'] ?>
-                                </td>
-                                <td>
-                                <?= number_format($row["Gia"], 0, ",", ".") ?> 
-                                </td>
-                                <!-- Lấy SL từ details sang giỏ hàng -->
-                                <td>
-                                    <input style="width: 40px;" value="<?= $_SESSION["cart"][$row['ID']]  ?>" type="number" name="quantity[<?= $row['ID']?>]">
-                                </td>
-                                <td>
-                                    <?= number_format($row["Gia"] *$_SESSION["cart"][$row['ID']], 0, ",", ".")?>
-                                    
-                                </td>
-                                <td>
-                                    <a href="cart.php?action=delete&id=<?= $row['ID'] ?>">
-                                        <i class="far fa-trash-alt"></i>
-                                    </a>     
-                                </td>
-                            </tr>
-                            <?php  }
-                            } ?>
-                        <tr style="text-align: right;">
-                            <td colspan="6" ><input type="submit" name="update" value="Cập nhật"></td>
-                        </tr>
-                        <tr>
-                            <td colspan="6"><b>Tổng tiền:</b>
-                                <?= number_format($total, 0, ",", ".") ?>vnd
-                            </td>
-                        </tr>
-                    </table>
-                    
-                    <br>
-                    
-                </div>
+    <div class="container px-3 my-5 clearfix">
+        <div class="card">
+            <div class="card-header">
+                <h2>Giỏ hàng của bạn</h2>
             </div>
-            <div class="info col-md-4 col-12">
-                <div class="address cart ">
-                    <p>Giao đến:</p><hr>
-                    <p>name</p>
-                    <p>địa chỉ</p>
-                </div>
-                <div class="tongtien cart d-flex justify-content-between">
-                    <p>Tổng tiền</p>
-                    <p><?= number_format($total, 0, ",", ".") ?>vnd</p>
-                </div>
-                <div class="buy_now d-flex justify-content-center">
-                    <input class="btn" name="buy" type="submit" value="Mua ngay">
-                </div>
-            </div>
+            <div class="card-body">
+                <div class="table-responsive">
 
+                    <table class="table table-hover  m-0">
+                        <thead>
+                            <tr>
+                                <th class="text-center align-middle py-3 px-0" style="width: 2em;">STT</th>
+                                <th class="text-center py-3 px-4" style="min-width: 400px;">Thông tin sản phẩm</th>
+                                <th class="text-right py-3 px-4" style="width: 10em;">Giá</th>
+                                <th class="text-center align-middle py-3 px-0" style="width: 8em;">Số lượng</th>
+                                <th class="text-right py-3 px-4" style="width: 14em;">Thành tiền</th>
+                                <th class="text-center align-middle py-3 px-0" style="width: 2em;"><a href="#" class="shop-tooltip float-none text-light" title data-original-title="Clear cart"><i class="ino ion-md-trash"></i></a></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <?php
+                                                $num=1;
+                                                $total=0;
+                                                if(isset($kq))
+                                                {
+                                                while($row=mysqli_fetch_array($kq)){ 
+                                                $total= $total+intval($row["Gia"]) * intval($_SESSION["cart"][$row['ID']]) ;
+                            ?>
+                            <td class="p-4 align-items-center"><?= $num++; ?></td>
+                            <td class="p-4">
+                            <div class="media align-items-center">
+                            <img src="../IMG/SP/<?= $row['Hinh_Anh'] ?>" class="d-block ui-w-40 ui-bordered mr-4" alt>
+                            <div class="media-body">
+                            <a href="http://localhost/DoAnCS2/medicine/view/details.php?idsp_details=<?= $row['ID'] ?>" class="d-block text-dark" id="TenSP"><?= $row['Ten_SP'] ?></a>
+                            
+                            </div>
+                            </div>
+                            </td>
+                            <td class="text-right font-weight-semibold align-middle p-4"><?= number_format($row["Gia"], 0, ",", ".") ?>.000 VND </td>
+                            <td class="align-middle align-items-center p-4"><input style="width: 40px;" value="<?= $_SESSION["cart"][$row['ID']]  ?>" type="number" name="quantity[<?= $row['ID']?>]"></td>
+                            <td class="text-right font-weight-semibold align-middle p-4"><?= number_format($row["Gia"] *$_SESSION["cart"][$row['ID']], 0, ",", ".")?>.000 VND</td>
+                            <td class="text-center align-middle px-0"><a href="cart.php?action=delete&id=<?= $row['ID'] ?>" class="shop-tooltip close float-none text-danger" title data-original-title="Remove">×</a></td>
+                        </tr>
+                        
+                        <?php  }
+                                } ?>    
+                        </tbody>
+                        <tfoot>
+                        <tr style="text-align: right;">
+                                                <td colspan="6" ><input class="btn p-2 m-1" type="submit" name="update" value="Cập nhật"></td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+                <div class="d-flex flex-wrap justify-content-between align-items-center pb-4">  
+                    <div class="mt-4">
+                        <label class="text-muted font-weight-normal">Mã giảm giá</label>
+                        <input type="text" placeholder="Nhập mã giảm giá" class="form-control">
+                    </div>
+                <div class="d-flex">
+
+                <div class="text-right mt-4">
+                <label class="text-muted font-weight-normal m-0">Tổng tiền</label>
+                <div class="text-large"><strong><?= number_format($total, 0, ",", ".") ?>.000 VND</strong></div>
+                </div>
+                </div>
+                </div>
+                <div class="float-right">
+                    <a href="../index.php">
+                        <button type="button" class="btn">&leftarrow; Trở lại</button>
+                    </a>
+
+                <!-- <button type="button" class="btn btn-lg btn-primary mt-2">Thanh toán</button> -->
+                <input class="btn" name="buy" type="submit" value="Mua ngay">
+                </div>
+            </div>
         </div>
-    </form> 
+    </div>
+
+</form> 
 <?php } ?>
     <!-- Optional JavaScript -->
     <!-- Popper.js first, then Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
-  </body>
+</body>
 </html>
