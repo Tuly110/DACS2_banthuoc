@@ -67,54 +67,14 @@
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: NiceAdmin
-  * Updated: Sep 18 2023 with Bootstrap v5.3.2
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 
-  <!-- Font Icon -->
 
   <link rel="stylesheet" href="./assets/css/login_signup/fonts/material-icon/css/material-design-iconic-font.min.css">
   <!-- Main css -->
 
   <link rel="stylesheet" href="./assets/css/login_signup/css/style.css">
 </head>
-<!-- <style>
-body{
-  background-color: #f3f5fa;
-  padding: 10px;
-  margin: 15px;
-}
-.card-header,
-.card-footer {
-  border-color: #ebeef4;
-  background-color: #fff;
-  color: #798eb3;
-  padding: 15px;
-}
 
-.card-title {
-  padding: 20px 0 15px 0;
-  font-size: 18px;
-  font-weight: 500;
-  color: #012970;
-  font-family: "Poppins", sans-serif;
-}
-
-.card-title span {
-  color: #899bbd;
-  font-size: 14px;
-  font-weight: 400;
-}
-
-.card-body {
-  padding: 0 20px 20px 20px;
-}
-
-</style> -->
 
 <body>
 

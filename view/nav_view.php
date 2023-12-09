@@ -1,6 +1,7 @@
 <?php 
   //session_start();
   include "../Arsha/connect.php";
+  // include "../Arsha/cart/cart.php";
   // unset($_SESSION['user']);
   $user = !empty($_SESSION['user']) ? $_SESSION['user'] :'';
   // $nav_request = mysqli_query($conn," SELECT * FROM `danhmuc`");
