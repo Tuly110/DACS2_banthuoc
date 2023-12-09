@@ -163,7 +163,7 @@
                 <!-- if(($num_sp < 1) || empty($search)) -->
                    <!-- if(("SELECT * FROM `sanpham` WHERE `Ten_SP` LIKE '%$search%'" == '') && empty($search)) -->
                    <div style="color: red; font-size: 32px; font-weight: bold; text-align: center;">
-                      <h2>Sản phẩm này hiện không có!</h2>
+                      <?php include "../404notfound/404.php" ?>
                     </div>
                 <?php }
                 } else {
